@@ -1,4 +1,4 @@
-hashbang_invoice
+hashbang_modules
 ================
 
-An OpenERP module that overrides default invoice reports
+An OpenERP modules that overrides default invoice and sale order reports

@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 {
-    'name': 'HashBang invoice report',
+    'name': 'HashBang webkit header and footer',
     'version': '1',
     'category': 'Reports/Webkit',
     'description': """
-Replaces the default invoice webkit report by a more suitable one for Hashbang SARL.
+Adds a webkit header and footer for Hashbang SARL.
 """ ,
     'author': 'Arthur Vuillard',
     'website': 'http://hashbang.fr',
-    'depends': ['invoice_webkit', 'hashbang_webkit'],
-    'data': ['data/invoice_report.xml'],
+    'depends': ['report_webkit'],
+    'data': ['data/base_headers_data.xml'],
     'demo_xml': [],
     'test': [],
     'installable': True,

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
-        <!-- replace by account.account_invoices -->
+        <!-- replaces account.account_invoices -->
         <report
             auto="False"
             id="account.account_invoices"

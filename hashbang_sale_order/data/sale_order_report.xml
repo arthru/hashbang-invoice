@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- replace by account.account_invoices -->
+        <report
+            auto="False"
+            id="sale.report_sale_order"
+            model="sale.order"
+            name="sale.order.webkit"
+            file="hashbang_sale_order/report/sale_order.mako"
+            string="Quotation - Order"
+            webkit_header="hashbang_invoice.hashbang_reports_portrait_header"
+            report_type="webkit"/>
+    </data>
+</openerp>
