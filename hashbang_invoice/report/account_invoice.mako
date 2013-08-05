@@ -262,7 +262,7 @@ td.vat {
         <tbody>
         %for line in inv.invoice_line :
             <tr >
-                <td>${line.product_id and line.product_id.code or ''} ${line.product_id and line.product_id.name or ''} : ${line.name}</td>
+                <td>${line.name}</td>
                 <td class="amount">${formatLang(line.quantity or 0.0,digits=get_digits(dp='Account'))}</td>
                 <td>${line.uos_id and line.uos_id.name or ''}</td>
                 <td class="amount">${formatLang(line.price_unit)} ${inv.currency_id.symbol}</td>
@@ -307,13 +307,13 @@ td.vat {
         </tfoot>
     </table>
         <br/>
+    %if inv.tax_line :
     <table class="list_total_table" width="60%" >
         <tr>
             <th style="text-align:left;">${_("Rate")}</th>
             <th>${_("Base")}</th>
             <th>${_("Tax")}</th>
         </tr>
-        %if inv.tax_line :
         %for t in inv.tax_line :
             <tr>
                 <td style="text-align:left;">${ t.name } </td>
@@ -321,8 +321,8 @@ td.vat {
                 <td class="amount">${ formatLang(t.amount, digits=get_digits(dp='Account')) } ${inv.currency_id.symbol}</td>
             </tr>
         %endfor
-        %endif
     </table>
+    %endif
         <br/>
         <h4>
                 ${_("Thank you for your prompt payment")}
@@ -334,40 +334,28 @@ td.vat {
     <table class="list_bank_table" >
       <!-- vat value are taken back from commercial id -->
         <tr>
-            <th style="width:20%;" colspan="2">${_("Bank")}</th>
+            <th style="width:20%;">${_("Bank")}</th>
             <td style="width:30%;text-align:left;">${inv_bank and inv_bank.bank_name or '-' } </td>
         </tr>
         <tr>
-            <th style="width:20%;" colspan="2">${_("IBAN")}</th>
+            <th style="width:20%;">${_("IBAN")}</th>
             <td style="width:50%;text-align:left;">${ inv_bank and inv_bank.acc_number or '-' }</td>
         </tr>
         <tr>
-            <th width="20%" colspan="2">${_("BIC")}</th>
+            <th width="20%">${_("BIC")}</th>
             <td style="width:30%;">${inv_bank and inv_bank.bank_bic or '-' }</td>
         </tr>
         <tr>
-            <th rowspan="4">RIB</th>
-            <th>Code banque</th>
-            <td>${inv_bank and inv_bank.bank_code or '-' }</td>
-        </tr>
-        <tr>
-            <th>Code agence</th>
-            <td>${inv_bank and inv_bank.office or '-' }</td>
-        </tr>
-        <tr>
-            <th>Compte</th>
-            <td>${inv_bank and inv_bank.rib_acc_number or '-' }</td>
-        </tr>
-        <tr>
-            <th>Clé</th>
-            <td>${inv_bank and inv_bank.key or '-' }</td>
+            <th>RIB</th>
+            <td>${inv_bank and inv_bank.bank_code or '-' } - ${inv_bank and inv_bank.office or '-' } - ${inv_bank and inv_bank.rib_acc_number or '-' } - ${inv_bank and inv_bank.key or '-' }</td>
         </tr>
     </table>
-    <br/>
     %if inv.comment :
+        <br/>
         <p class="std_text">${inv.comment | carriage_returns}</p>
     %endif
     %if inv.note2 :
+        <br/>
         <p class="std_text">${inv.note2 | n}</p>
     %endif
     %if inv.fiscal_position :
