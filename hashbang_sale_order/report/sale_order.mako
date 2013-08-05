@@ -120,29 +120,29 @@ td.amount, th.amount {
             %endfor
         </table>
 
-    <p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
+    <p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
     <h1 style="clear:both;">${quotation and _(u'Quotation N°') or _(u'Order N°') } ${order.name}</h1>
-    <%
-         doc_title = 'test' 
-    %>
-    <table class="basic_table" width="100%">
+    
+     <table class="basic_table" width="100%">
         <tr>
             <td style="font-weight:bold;">${quotation and _("Quotation Date") or _("Date Ordered")}</td>
+            <td style="font-weight:bold;">${ _("Validité") }</td>
             <td style="font-weight:bold;">${_("Salesman")}</td>
             <td style="font-weight:bold;">${_('Payment Term')}</td>
         </tr>
         <tr>
             <td>${formatLang(order.date_order, date=True)}</td>
+            <td>1 mois</td>
             <td>${order.user_id and order.user_id.name or ''}</td>
             <td>${order.payment_term and order.payment_term.note or ''}</td>
         </tr>
     </table>
 
-    <div>
     %if order.note1:
+    <div>
         <p class="std_text"> ${order.note1| n} </p>
-    %endif
     </div>
+    %endif
 
     <table class="list_sale_table" width="100%" style="margin-top: 20px;">
         <thead>
@@ -166,7 +166,7 @@ td.amount, th.amount {
             </tr>
             %if line.formatted_note:
             <tr>
-              <td class="formatted_note" colspan="6">
+              <td class="formatted_note" colspan="6" style="border-top: none;">
                 ${line.formatted_note| n}
               </td>
             </tr>
@@ -198,44 +198,6 @@ td.amount, th.amount {
     </table>
     <br/>
     
-    <%
-      inv_bank = order.company_id.bank_ids[0]
-    %>
-    <p>Acompte payable à l'acceptation du devis par virement sur le compte bancaire suivant :</p>
-    <table class="list_bank_table" >
-      <!-- vat value are taken back from commercial id -->
-        <tr>
-            <th style="width:20%;" colspan="2">${_("Bank")}</th>
-            <td style="width:30%;text-align:left;">${inv_bank and inv_bank.bank_name or '-' } </td>
-        </tr>
-        <tr>
-            <th style="width:20%;" colspan="2">${_("IBAN")}</th>
-            <td style="width:50%;text-align:left;">${ inv_bank and inv_bank.acc_number or '-' }</td>
-        </tr>
-        <tr>
-            <th width="20%" colspan="2">${_("BIC")}</th>
-            <td style="width:30%;">${inv_bank and inv_bank.bank_bic or '-' }</td>
-        </tr>
-        <tr>
-            <th rowspan="4">RIB</th>
-            <th>Code banque</th>
-            <td>${inv_bank and inv_bank.bank_code or '-' }</td>
-        </tr>
-        <tr>
-            <th>Code agence</th>
-            <td>${inv_bank and inv_bank.office or '-' }</td>
-        </tr>
-        <tr>
-            <th>Compte</th>
-            <td>${inv_bank and inv_bank.rib_acc_number or '-' }</td>
-        </tr>
-        <tr>
-            <th>Clé</th>
-            <td>${inv_bank and inv_bank.key or '-' }</td>
-        </tr>
-    </table>
-    <br/>
-
     %if order.note :
         <p class="std_text">${order.note | carriage_returns}</p>
     %endif
@@ -243,6 +205,31 @@ td.amount, th.amount {
         <p class="std_text">${order.note2 | n}</p>
     %endif
 
+    <%
+      inv_bank = order.company_id.bank_ids[0]
+    %>
+    <p>Acompte payable à l'acceptation du devis par virement sur le compte bancaire suivant :</p>
+    <table class="list_bank_table" >
+      <!-- vat value are taken back from commercial id -->
+        <tr>
+            <th style="width:20%;">${_("Bank")}</th>
+            <td style="width:30%;text-align:left;">${inv_bank and inv_bank.bank_name or '-' } </td>
+        </tr>
+        <tr>
+            <th style="width:20%;">${_("IBAN")}</th>
+            <td style="width:50%;text-align:left;">${ inv_bank and inv_bank.acc_number or '-' }</td>
+        </tr>
+        <tr>
+            <th width="20%">${_("BIC")}</th>
+            <td style="width:30%;">${inv_bank and inv_bank.bank_bic or '-' }</td>
+        </tr>
+        <tr>
+            <th>RIB</th>
+            <td>${inv_bank and inv_bank.bank_code or '' } - ${inv_bank and inv_bank.office or '' } - ${inv_bank and inv_bank.rib_acc_number or '' } - ${inv_bank and inv_bank.key or '' }</td>
+        </tr>
+    </table>
+
+    <p>&nbsp;</p><p>&nbsp;</p>
     <table width="100%" style="text-align: center; vertical-align: top;">
         <tr><td width="50%">Mention manuscrite<br/>"Bon pour accord"</td><td width="25%">Date</td><td width="25%">Signature</td></tr>
         <tr><td><br/><br/><br/><br/></td><td></td><td></td></tr>
