@@ -220,9 +220,6 @@ td.vat {
             ${_("Supplier Refund")} ${inv.number or ''}
         %endif
     </h1>
-    <h3  style="clear: both; padding-top: 20px;">
-        ${_("Subject : ")} ${inv.name or ''}
-    </h3>
 
     <table class="basic_table" width="100%">
         <tr>
@@ -237,7 +234,7 @@ td.vat {
             <td class="date">${formatLang(inv.date_due, date=True)}</td>
             <!--<td style="text-align:center;width:120px;">${inv.user_id and inv.user_id.name or ''}</td>-->
             <td style="text-align:center">${inv.payment_term and inv.payment_term.note or ''}</td>
-            <td style="text-align:center">${inv.origin or ''}</td>
+            <td style="text-align:center">${ _(u'Quotation N°') } ${inv.origin or ''}</td>
         </tr>
     </table>
 
