@@ -189,11 +189,13 @@ td.amount, th.amount {
                 <td colspan="2" style="border-style:none; text-align: right;"><b>${_("Total:")}</b></td>
                 <td class="amount" style="border-style:none">${formatLang(order.amount_total, get_digits(dp='Sale Price'))} ${order.pricelist_id.currency_id.symbol}</td>
             </tr>
+            % if order.payment_term.id == 4:
             <tr>
                 <td colspan="3" style="border-style:none"/>
                 <td colspan="2" style="border-style:none; text-align: right;"><b>${_("Acompte :")}</b></td>
                 <td class="amount" style="border-style:none">${formatLang(order.amount_total*0.3, get_digits(dp='Sale Price'))} ${order.pricelist_id.currency_id.symbol}</td>
             </tr>
+            % endif
         </tfoot>
     </table>
     <br/>
@@ -205,6 +207,7 @@ td.amount, th.amount {
         <p class="std_text">${order.note2 | n}</p>
     %endif
 
+    % if order.payment_term.id == 4:
     <%
       inv_bank = order.company_id.bank_ids[0]
     %>
@@ -228,6 +231,7 @@ td.amount, th.amount {
             <td>${inv_bank and inv_bank.bank_code or '' } - ${inv_bank and inv_bank.office or '' } - ${inv_bank and inv_bank.rib_acc_number or '' } - ${inv_bank and inv_bank.key or '' }</td>
         </tr>
     </table>
+    % endif
 
     <p>&nbsp;</p><p>&nbsp;</p>
     <table width="100%" style="text-align: center; vertical-align: top;">
