@@ -9,7 +9,7 @@
             name="sale.order.webkit"
             file="hashbang_sale_order/report/sale_order.mako"
             string="Quotation - Order"
-            webkit_header="hashbang_invoice.hashbang_reports_portrait_header"
+            webkit_header="hashbang_webkit.hashbang_reports_portrait_header"
             report_type="webkit"/>
     </data>
 </openerp>
