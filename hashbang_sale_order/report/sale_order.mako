@@ -239,8 +239,6 @@ td.amount, th.amount {
         <tr><td><br/><br/><br/><br/></td><td></td><td></td></tr>
     </table>
 
-    <p style="page-break-after: always"/>
-    <br/>
     %endfor
 </body>
 </html>

@@ -361,7 +361,6 @@ td.vat {
         ${inv.fiscal_position.note | n}
         </p>
     %endif
-    <!--<p style="page-break-after:always"></p>-->
     %endfor
 </body>
 </html>
