@@ -227,14 +227,18 @@ td.vat {
             <th class="date">${_("Due Date")}</td>
             <!--<th style="text-align:center;width:120px;">${_("Responsible")}</td>-->
             <th style="text-align:center">${_("Payment Term")}</td>
+            %if inv.origin:
             <th style="text-align:center">${_("Our reference")}</td>
+            %endif
         </tr>
         <tr>
             <td class="date">${formatLang(inv.date_invoice, date=True)}</td>
             <td class="date">${formatLang(inv.date_due, date=True)}</td>
             <!--<td style="text-align:center;width:120px;">${inv.user_id and inv.user_id.name or ''}</td>-->
             <td style="text-align:center">${inv.payment_term and inv.payment_term.note or ''}</td>
+            %if inv.origin:
             <td style="text-align:center">${ _(u'Quotation N°') } ${inv.origin or ''}</td>
+            %endif
         </tr>
     </table>
 
