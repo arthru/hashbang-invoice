@@ -324,14 +324,15 @@ td.vat {
         %endfor
     </table>
     %endif
+    <%
+      inv_bank = inv.partner_bank_id
+    %>
+    %if inv_bank:
         <br/>
         <h4>
                 ${_("Thank you for your prompt payment")}
         </h4>
         <br/>
-    <%
-      inv_bank = inv.partner_bank_id
-    %>
     <table class="list_bank_table" >
       <!-- vat value are taken back from commercial id -->
         <tr>
@@ -351,6 +352,7 @@ td.vat {
             <td>${inv_bank and inv_bank.bank_code or '-' } - ${inv_bank and inv_bank.office or '-' } - ${inv_bank and inv_bank.rib_acc_number or '-' } - ${inv_bank and inv_bank.key or '-' }</td>
         </tr>
     </table>
+    %endif
     %if inv.comment :
         <br/>
         <p class="std_text">${inv.comment | carriage_returns}</p>
