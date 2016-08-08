@@ -172,8 +172,8 @@ td.amount, th.amount {
             </tr>
             %endif
         %endfor
-        </tbody>
-        <tfoot class="totals">
+        <!--</tbody>
+        <tfoot class="totals">-->
             <tr>
                 <td colspan="3" style="border-style:none"/>
                 <td colspan="2" style="border-style:none; text-align: right;"><b>${_("Net Total:")}</b></td>
@@ -189,14 +189,22 @@ td.amount, th.amount {
                 <td colspan="2" style="border-style:none; text-align: right;"><b>${_("Total:")}</b></td>
                 <td class="amount" style="border-style:none">${formatLang(order.amount_total, get_digits(dp='Sale Price'))} ${order.pricelist_id.currency_id.symbol}</td>
             </tr>
+            % if order.payment_term.id == 10:
+            <tr>
+                <td colspan="3" style="border-style:none"/>
+			<td colspan="2" style="border-style:none; text-align: right;"><b>${_("Acompte :")}</b></td>
+			<td class="amount" style="border-style:none">${formatLang(order.amount_total/3, get_digits(dp='Sale Price'))} ${order.pricelist_id.currency_id.symbol}</td>
+            </tr>
+            % endif
             % if order.payment_term.id == 4:
             <tr>
                 <td colspan="3" style="border-style:none"/>
-                <td colspan="2" style="border-style:none; text-align: right;"><b>${_("Acompte :")}</b></td>
-                <td class="amount" style="border-style:none">${formatLang(order.amount_total*0.3, get_digits(dp='Sale Price'))} ${order.pricelist_id.currency_id.symbol}</td>
+			<td colspan="2" style="border-style:none; text-align: right;"><b>${_("Acompte :")}</b></td>
+			<td class="amount" style="border-style:none">${formatLang(order.amount_total*0.3, get_digits(dp='Sale Price'))} ${order.pricelist_id.currency_id.symbol}</td>
             </tr>
             % endif
-        </tfoot>
+        <!--</tfoot>-->
+        </tbody>
     </table>
     <br/>
     
@@ -207,7 +215,7 @@ td.amount, th.amount {
         <p class="std_text">${order.note2 | n}</p>
     %endif
 
-    % if order.payment_term.id == 4:
+    % if order.payment_term.id in [4, 10]:
     <%
       inv_bank = order.company_id.bank_ids[0]
     %>
@@ -233,7 +241,6 @@ td.amount, th.amount {
     </table>
     % endif
 
-    <p>&nbsp;</p><p>&nbsp;</p>
     <table width="100%" style="text-align: center; vertical-align: top;">
         <tr><td width="50%">Mention manuscrite<br/>"Bon pour accord"</td><td width="25%">Date</td><td width="25%">Signature</td></tr>
         <tr><td><br/><br/><br/><br/></td><td></td><td></td></tr>
